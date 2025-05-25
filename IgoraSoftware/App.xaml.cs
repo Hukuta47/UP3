@@ -4,9 +4,6 @@ using System.Windows;
 
 namespace IgoraSoftware
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
         static public IgoraEntities entities = new IgoraEntities();
