@@ -8,17 +8,16 @@ namespace IgoraSoftware.Pages
 {
     public partial class MainPage : Page
     {
-        PageHelper pageHelper;
+        public static Frame MainFrame;
         public MainPage(Users User)
         {
             InitializeComponent();
-            pageHelper.Frame = Frame_UserPages;
-
+            MainFrame = Frame_UserPages;
             switch (User.RoleId)
             {
-                case 1: pageHelper.Frame.Navigate(new AdministratorMainPage(User)); break;
-                case 2: pageHelper.Frame.Navigate(new ShiftSupervisorMainPage(User)); break;
-                case 3: pageHelper.Frame.Navigate(new SalesmanMainPage(User)); break;
+                case 1: MainFrame.Navigate(new AdministratorMainPage(User)); break;
+                case 2: MainFrame.Navigate(new ShiftSupervisorMainPage(User)); break;
+                case 3: MainFrame.Navigate(new SalesmanMainPage(User)); break;
             }
         }
     }

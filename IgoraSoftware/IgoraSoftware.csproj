@@ -123,6 +123,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ByRole\ShiftSupervisor\AcceptOrderEquipment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ByRole\ShiftSupervisor\ShiftSupervisorMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -147,6 +151,9 @@
     </Compile>
     <Compile Include="Pages\ByRole\Salesman\SalesmanMainPage.xaml.cs">
       <DependentUpon>SalesmanMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ByRole\ShiftSupervisor\AcceptOrderEquipment.xaml.cs">
+      <DependentUpon>AcceptOrderEquipment.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ByRole\ShiftSupervisor\ShiftSupervisorMainPage.xaml.cs">
       <DependentUpon>ShiftSupervisorMainPage.xaml</DependentUpon>

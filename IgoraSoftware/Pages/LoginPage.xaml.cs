@@ -26,8 +26,7 @@ namespace IgoraSoftware.Pages
 
                 if (Password == User.Password)
                 {
-                    App.LoginedUser = User;
-
+                    MainWindow.WindowFrame.Navigate(new MainPage(User));
                 }
                 else
                 {
