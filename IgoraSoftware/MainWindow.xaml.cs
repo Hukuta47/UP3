@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IgoraSoftware.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,12 +14,8 @@ namespace IgoraSoftware
         public MainWindow()
         {
             InitializeComponent();
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(App.entities.Clients.First().Name);
+            PageHelper.Frame = Frame_MainFrame;
+            PageHelper.Frame.Navigate(new CreateOrder());
         }
     }
 }
