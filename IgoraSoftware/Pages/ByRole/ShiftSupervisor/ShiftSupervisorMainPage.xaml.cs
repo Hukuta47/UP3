@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IgoraSoftware.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,10 @@ namespace IgoraSoftware.Pages.ByRole.ShiftSupervisor
     /// </summary>
     public partial class ShiftSupervisorMainPage : Page
     {
-        public ShiftSupervisorMainPage()
+        Users User;
+        public ShiftSupervisorMainPage(Users User)
         {
+            this.User = User;
             InitializeComponent();
         }
     }

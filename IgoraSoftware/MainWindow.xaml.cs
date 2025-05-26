@@ -10,11 +10,12 @@ namespace IgoraSoftware
 {
     public partial class MainWindow : Window
     {
+        static public PageHelper pageHelper;
         public MainWindow()
         {
             InitializeComponent();
-            PageHelper.Frame = Frame_MainFrame;
-            PageHelper.Frame.Navigate(new LoginPage());
+            pageHelper.Frame = Frame_MainFrame;
+            pageHelper.Frame.Navigate(new LoginPage());
         }
     }
 }

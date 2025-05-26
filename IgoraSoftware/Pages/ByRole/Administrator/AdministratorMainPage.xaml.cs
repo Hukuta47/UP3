@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IgoraSoftware.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,12 @@ using System.Windows.Shapes;
 
 namespace IgoraSoftware.Pages.ByRole.Administrator
 {
-    /// <summary>
-    /// Логика взаимодействия для AdministratorMainPage.xaml
-    /// </summary>
     public partial class AdministratorMainPage : Page
     {
-        public AdministratorMainPage()
+        Users User;
+        public AdministratorMainPage(Users User)
         {
+            this.User = User;
             InitializeComponent();
         }
     }

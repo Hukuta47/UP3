@@ -9,6 +9,6 @@ namespace IgoraSoftware
 {
     public class PageHelper
     {
-        public static Frame Frame;
+        public Frame Frame;
     }
 }

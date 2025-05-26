@@ -9,6 +9,10 @@
       Title="AdministratorMainPage">
 
     <Grid>
-        
-    </Grid>
+		<StackPanel HorizontalAlignment="Center">
+			<Button Content="Сформировать отчет"/>
+			<Button Content="История входов сотрудников"/>
+			<Button Content="Расходные материалы"/>
+		</StackPanel>
+	</Grid>
 </Page>

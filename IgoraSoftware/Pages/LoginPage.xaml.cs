@@ -26,12 +26,8 @@ namespace IgoraSoftware.Pages
 
                 if (Password == User.Password)
                 {
-                    switch (User.RoleId)
-                    {
-                        case 1: PageHelper.Frame.Navigate(new AdministratorMainPage()); break;
-                        case 2: PageHelper.Frame.Navigate(new ShiftSupervisorMainPage()); break;
-                        case 3: PageHelper.Frame.Navigate(new SalesmanMainPage()); break;
-                    }
+                    App.LoginedUser = User;
+
                 }
                 else
                 {
