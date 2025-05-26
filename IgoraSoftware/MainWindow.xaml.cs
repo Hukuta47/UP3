@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 
@@ -15,7 +14,7 @@ namespace IgoraSoftware
         {
             InitializeComponent();
             PageHelper.Frame = Frame_MainFrame;
-            PageHelper.Frame.Navigate(new CreateOrder());
+            PageHelper.Frame.Navigate(new LoginPage());
         }
     }
 }

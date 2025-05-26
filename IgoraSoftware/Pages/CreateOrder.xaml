@@ -26,7 +26,7 @@
 					<DataGridTextColumn Header="Стоимость" Width="1*" Binding="{Binding PricePerHourService, StringFormat=F2}"/>
 				</DataGrid.Columns>
 			</DataGrid>
-			<Button Content="Проверить выделинные" Click="Button_Click"/>
+			<Button Content="Создать заказ"/>
 		</StackPanel>
 	</Grid>
 </Page>

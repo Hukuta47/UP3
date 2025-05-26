@@ -16,14 +16,10 @@ namespace IgoraSoftware.Pages
             InitializeComponent();
             foreach (Services service in App.entities.Services.ToList())
             {
-                itemsDatas.Add(new ItemDataGrid(false, service.Name, service.PricePerHour));
+                itemsDatas.Add(new ItemDataGrid(service.Name, service.PricePerHour));
             }
             ComboBox_CodeEnter.ItemsSource = App.entities.Clients.ToList();
             DataGrid_ListServices.ItemsSource = itemsDatas;
-        }
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-
         }
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
@@ -33,13 +29,12 @@ namespace IgoraSoftware.Pages
         }
         class ItemDataGrid
         {
-            public ItemDataGrid(bool IsChecked, string NameService, decimal PricePerHourService)
+            public ItemDataGrid(string NameService, decimal PricePerHourService)
             {
-                this.IsChecked = IsChecked;
                 this.NameService = NameService;
                 this.PricePerHourService = PricePerHourService;
             }
-            public bool? IsChecked { get; set; }
+            public bool? IsChecked { get; set; } = false;
             public string NameService { get; }
             public decimal PricePerHourService { get; }
         }

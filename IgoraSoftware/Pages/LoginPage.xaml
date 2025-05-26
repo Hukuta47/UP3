@@ -9,6 +9,12 @@
       Title="LoginPage">
 
     <Grid>
-        
-    </Grid>
+		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
+			<TextBlock Text="Логин"/>
+			<TextBox Name="TextBox_LoginEnter"/>
+			<TextBlock Text="Пароль"/>
+			<PasswordBox Name="PasswordBox_PasswordEnter"/>
+			<Button Content="Войти" Click="Button_Click"/>
+		</StackPanel>
+	</Grid>
 </Page>

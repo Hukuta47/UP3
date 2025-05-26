@@ -115,7 +115,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\ByRole\Salesman\MainPage.xaml">
+    <Page Include="Pages\ByRole\Administrator\AdministratorMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ByRole\Salesman\SalesmanMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ByRole\ShiftSupervisor\ShiftSupervisorMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,8 +138,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageHelper.cs" />
-    <Compile Include="Pages\ByRole\Salesman\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Pages\ByRole\Administrator\AdministratorMainPage.xaml.cs">
+      <DependentUpon>AdministratorMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ByRole\Salesman\SalesmanMainPage.xaml.cs">
+      <DependentUpon>SalesmanMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ByRole\ShiftSupervisor\ShiftSupervisorMainPage.xaml.cs">
+      <DependentUpon>ShiftSupervisorMainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\CreateOrder.xaml.cs">
       <DependentUpon>CreateOrder.xaml</DependentUpon>
@@ -172,10 +186,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\ByRole\Administrator\" />
-    <Folder Include="Pages\ByRole\ShiftSupervisor\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Database\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

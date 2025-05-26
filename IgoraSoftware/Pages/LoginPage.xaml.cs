@@ -1,28 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using IgoraSoftware.Database;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using IgoraSoftware.Pages.ByRole.Administrator;
+using IgoraSoftware.Pages.ByRole.ShiftSupervisor;
+using IgoraSoftware.Pages.ByRole.Salesman;
 
 namespace IgoraSoftware.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для LoginPage.xaml
-    /// </summary>
     public partial class LoginPage : Page
     {
         public LoginPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string Login = TextBox_LoginEnter.Text;
+            string Password = PasswordBox_PasswordEnter.Password;
+
+            if (App.entities.Users.ToList().Exists(user => user.Login == Login))
+            {
+                Users User = App.entities.Users.First(user => user.Login == Login);
+
+                if (Password == User.Password)
+                {
+                    switch (User.RoleId)
+                    {
+                        case 1: PageHelper.Frame.Navigate(new AdministratorMainPage()); break;
+                        case 2: PageHelper.Frame.Navigate(new ShiftSupervisorMainPage()); break;
+                        case 3: PageHelper.Frame.Navigate(new SalesmanMainPage()); break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Не Заебись");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Такого нет(");
+            }
         }
     }
 }

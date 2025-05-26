@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace IgoraSoftware.Pages.ByRole.Salesman
 {
     /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
+    /// Логика взаимодействия для SalesmanMainPage.xaml
     /// </summary>
-    public partial class MainPage : Page
+    public partial class SalesmanMainPage : Page
     {
-        public MainPage()
+        public SalesmanMainPage()
         {
             InitializeComponent();
         }
