@@ -9,6 +9,13 @@
       Title="MainPage">
 
     <Grid>
-		<Frame Name="Frame_UserPages"/>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="2*"/>
+			<RowDefinition Height="8*"/>
+			<RowDefinition Height="1*"/>
+		</Grid.RowDefinitions>
+
+		<TextBlock Name="TextBlock_TimeSession" Text="00:00" Grid.Row="0"/>
+		<Frame Name="Frame_UserPages" Grid.Row="1"/>
 	</Grid>
 </Page>

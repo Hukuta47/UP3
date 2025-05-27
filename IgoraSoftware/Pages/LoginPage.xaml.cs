@@ -26,7 +26,14 @@ namespace IgoraSoftware.Pages
 
                 if (Password == User.Password)
                 {
-                    MainWindow.WindowFrame.Navigate(new MainPage(User));
+                    if (App.blockedUsers.Exists(u => u.blockedUser == User))
+                    {
+                        MessageBox.Show($"Учетная запись разблокируется в {App.blockedUsers.Find(u => u.blockedUser == User).GetTimeLeft().Substring(0,5)}");
+                    }
+                    else
+                    {
+                        MainWindow.WindowFrame.Navigate(new MainPage(User));
+                    }
                 }
                 else
                 {
