@@ -8,7 +8,6 @@ namespace IgoraSoftware.Pages.ByRole.ShiftSupervisor
         public AcceptOrderEquipment()
         {
             InitializeComponent();
-
             ComboBox_SelectOrder.ItemsSource = App.entities.Order.ToList();
         }
     }

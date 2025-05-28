@@ -1,20 +1,22 @@
 ﻿using IgoraSoftware.Database;
+using SkiaSharp;
+using System;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using IgoraSoftware.Pages.ByRole.Administrator;
-using IgoraSoftware.Pages.ByRole.ShiftSupervisor;
-using IgoraSoftware.Pages.ByRole.Salesman;
+using System.Windows.Media.Imaging;
 
 namespace IgoraSoftware.Pages
 {
     public partial class LoginPage : Page
     {
+        int AttemptsLogin = 0;
+        string GeneratedNumberCaptcha;
         public LoginPage()
         {
             InitializeComponent();
         }
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string Login = TextBox_LoginEnter.Text;
@@ -32,11 +34,35 @@ namespace IgoraSoftware.Pages
                     }
                     else
                     {
-                        MainWindow.WindowFrame.Navigate(new MainPage(User));
+                        if (AttemptsLogin == 2 && TextBox_EnterCaptchaNumer.Text == GeneratedNumberCaptcha)
+                        {
+                            MainWindow.WindowFrame.Navigate(new MainPage(User));
+                        }
+                        else
+                        {
+                            MainWindow.WindowFrame.Navigate(new MainPage(User));
+                        }
                     }
                 }
                 else
                 {
+                    AttemptsLogin++;
+                    switch (AttemptsLogin)
+                    {
+                        case 2: break;
+                        case 3: break;
+                    }
+
+                    if (AttemptsLogin == 2)
+                    {
+                        ChangeCAPTChaImage_Click();
+                        Grid_Captcha.Visibility = Visibility.Visible;
+                    }
+                    else if (AttemptsLogin == 3)
+                    {
+                        MessageBox.Show("Ну ты пиздец, бан тебе на 10 секунд дудосер");
+                    }
+                    
                     MessageBox.Show("Не Заебись");
                 }
             }
@@ -44,6 +70,83 @@ namespace IgoraSoftware.Pages
             {
                 MessageBox.Show("Такого нет(");
             }
+        }
+
+        private void ChangeCAPTChaImage_Click()
+        {
+            var info = new SKImageInfo(200, 50);
+            using (var surface = SKSurface.Create(info))
+            {
+                var canvas = surface.Canvas;
+                Random random = new Random();
+                canvas.Clear(SKColors.Azure);
+
+
+                for (int i = 0; i < 5000; i++)
+                {
+                    double randX = random.NextDouble() * 200;
+                    double randY = random.NextDouble() * 50;
+
+                    using (var paint = new SKPaint())
+                    {
+                        paint.Color = new SKColor((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255));
+                        paint.StrokeWidth = 1;
+                        paint.IsAntialias = false;
+                        paint.Style = SKPaintStyle.Fill;
+
+                        // Рисуем круг
+                        canvas.DrawCircle((float)randX, (float)randY, 1, paint);
+                    }
+                }
+
+                for (int i = 1; i <= 5; i++)
+                {
+                    double randomY = -1 + (random.NextDouble() * 2);
+                    int randNumber = random.Next(0, 9);
+                    GeneratedNumberCaptcha += randNumber;
+
+                    using (var typeface = SKTypeface.FromFamilyName("Comic Sans MS"))
+                    using (var font = new SKFont(typeface, 32))
+                    using (var Number = SKTextBlob.Create($"{randNumber}", font))
+                    {
+
+                        var textPaint = new SKPaint
+                        {
+
+                            Color = new SKColor((byte)random.Next(0, 255), (byte)random.Next(0, 255), (byte)random.Next(0, 255)),
+                            IsAntialias = true,
+                            BlendMode = SKBlendMode.Plus
+                        };
+
+                        canvas.DrawText(Number, i * 31, 38 + ((float)randomY * 15), textPaint);
+                    }
+                }
+
+                using (SKImage image = surface.Snapshot())
+                using (SKBitmap bitmap = SKBitmap.FromImage(image))
+                {
+                    // Конвертируем SkiaSharp-изображение в WPF BitmapImage
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        bitmap.Encode(memoryStream, SKEncodedImageFormat.Png, 100);
+                        memoryStream.Position = 0;
+
+                        var bitmapImage = new BitmapImage();
+                        bitmapImage.BeginInit();
+                        bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                        bitmapImage.StreamSource = memoryStream;
+                        bitmapImage.EndInit();
+
+
+                        Image_PictureCAPTCha.Source = bitmapImage;
+                    }
+                }
+            }
+        }
+
+        private void ChangeCAPTChaImage_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeCAPTChaImage_Click();
         }
     }
 }
