@@ -21,7 +21,7 @@ namespace IgoraSoftware.Database
         }
     
         public int Id { get; set; }
-        public string OrderCode { get; set; }
+        public string Code { get; set; }
         public System.DateTime DataCreate { get; set; }
         public string ClientCode { get; set; }
         public int StatusId { get; set; }

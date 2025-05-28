@@ -18,7 +18,9 @@ namespace IgoraSoftware.Pages
             {
                 itemsDatas.Add(new ItemDataGrid(service.Name, service.PricePerHour));
             }
-            ComboBox_CodeEnter.ItemsSource = App.entities.Clients.ToList();
+            ComboBox_CodeOrderEnter.ItemsSource = App.entities.Orders_Log.ToList();
+            ComboBox_CodeOrderEnter.Text = (App.entities.Order.ToList().Last().Id + 1).ToString();
+            ComboBox_CodeClientEnter.ItemsSource = App.entities.Clients.ToList();
             DataGrid_ListServices.ItemsSource = itemsDatas;
         }
         private void CheckBox_Click(object sender, RoutedEventArgs e)

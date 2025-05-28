@@ -27,11 +27,13 @@ namespace IgoraSoftware.Database
     
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<Orders_Log> Orders_Log { get; set; }
         public virtual DbSet<PassportData> PassportData { get; set; }
         public virtual DbSet<Services> Services { get; set; }
         public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<TypeLogin> TypeLogin { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<LoginHistory_Log> LoginHistory_Log { get; set; }
     }
 }

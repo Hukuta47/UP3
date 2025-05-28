@@ -10,8 +10,10 @@
 
 	<Grid>
 		<StackPanel>
+			<TextBlock Text="Код заказа"/>
+			<ComboBox Name="ComboBox_CodeOrderEnter" IsEditable="True" DisplayMemberPath="Id"/>
 			<TextBlock Text="Код клиента"/>
-			<ComboBox Name="ComboBox_CodeEnter" IsEditable="True" DisplayMemberPath="Code"/>
+			<ComboBox Name="ComboBox_CodeClientEnter" IsEditable="True" DisplayMemberPath="Code"/>
 			<TextBlock Text="Услуги"/>
 			<DataGrid Name="DataGrid_ListServices" Style="{StaticResource DataGridNoSelect}" Height="150" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False">
 				<DataGrid.Columns>

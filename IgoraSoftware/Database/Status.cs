@@ -18,6 +18,7 @@ namespace IgoraSoftware.Database
         public Status()
         {
             this.Order = new HashSet<Order>();
+            this.Orders_Log = new HashSet<Orders_Log>();
         }
     
         public int Id { get; set; }
@@ -25,5 +26,7 @@ namespace IgoraSoftware.Database
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Orders_Log> Orders_Log { get; set; }
     }
 }

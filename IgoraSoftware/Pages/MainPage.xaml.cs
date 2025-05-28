@@ -7,7 +7,6 @@ using System.Windows.Threading;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
-using Microsoft.Win32;
 
 namespace IgoraSoftware.Pages
 {
@@ -16,10 +15,10 @@ namespace IgoraSoftware.Pages
         public static Frame MainFrame;
         Users User;
         DispatcherTimer timerSession = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromSeconds(1) };
-        //TimeSpan timeSession = new TimeSpan(2, 30, 0);
-        //TimeSpan timeToEndSession = TimeSpan.FromMinutes(15);
-        TimeSpan timeSession = new TimeSpan(0, 0, 10);
-        TimeSpan timeToEndSession = TimeSpan.FromMinutes(1);
+        TimeSpan timeSession = new TimeSpan(2, 30, 0);
+        TimeSpan timeToEndSession = TimeSpan.FromMinutes(15);
+        //TimeSpan timeSession = new TimeSpan(0, 0, 10);
+        //TimeSpan timeToEndSession = TimeSpan.FromMinutes(1);
         public MainPage(Users User)
         {
             this.User = User;
