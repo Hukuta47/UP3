@@ -2,15 +2,14 @@
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
+using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
 
 namespace IgoraSoftware.Pages
 {
@@ -29,6 +28,7 @@ namespace IgoraSoftware.Pages
             ComboBox_CodeClientEnter.ItemsSource = App.entities.Clients.ToList();
             ComboBox_CodeClientEnter.SelectedValue = App.entities.Clients.ToList().Last().Code;
             DataGrid_ListServices.ItemsSource = itemsDatas;
+
         }
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
@@ -50,19 +50,32 @@ namespace IgoraSoftware.Pages
 
         private void CreateOrder_Click(object sender, RoutedEventArgs e)
         {
+            generateshtrihCode();
+        }
+        void generateshtrihCode()
+        {
+            ggg();
+            PrintBarcode();
+        }
+
+        private void SearchServices_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            List<ItemDataGrid> itemsDatas = new List<ItemDataGrid>();
+            foreach (Services service in App.entities.Services.Where(item => item.Name.Contains(SearchServices.Text)))
+            {
+                itemsDatas.Add(new ItemDataGrid(service.Name, service.PricePerHour));
+            }
+            DataGrid_ListServices.ItemsSource = itemsDatas;
+        }
+
+        void ggg()
+        {
             float scale = 5;
-
-            Image_Barcode.Width = 205;
-            Image_Barcode.Height = 250;
-
             string ClientCode = ComboBox_CodeClientEnter.Text;
             string DateCode = DateTime.Now.ToShortDateString().Replace(".", "");
-
             string code = ClientCode + DateCode;
 
-
-
-            var info = new SKImageInfo((int)Image_Barcode.Width, (int)Image_Barcode.Height);
+            var info = new SKImageInfo(205, 140); // Фиксированные размеры как в вашем коде
             using (var surface = SKSurface.Create(info))
             {
                 var canvas = surface.Canvas;
@@ -72,7 +85,7 @@ namespace IgoraSoftware.Pages
                 int indexNumber = 0;
 
                 for (int i = 1; i < code.Length + 4; i++)
-                {   
+                {
                     int number = int.Parse(code[indexNumber].ToString());
                     if (i == 1 || i == 10 || i == 19)
                     {
@@ -116,7 +129,6 @@ namespace IgoraSoftware.Pages
                     canvas.DrawText(Number, 110, 26.85f * scale, textPaint);
                 }
 
-
                 using (SKImage image = surface.Snapshot())
                 using (SKBitmap bitmap = SKBitmap.FromImage(image))
                 {
@@ -137,7 +149,37 @@ namespace IgoraSoftware.Pages
                     }
                 }
             }
-
         }
+
+        void PrintBarcode()
+        {
+            // Создаем диалог печати
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                // Создаем визуальный элемент для печати
+                var visual = new DrawingVisual();
+
+                using (var drawingContext = visual.RenderOpen())
+                {
+                    // Получаем изображение из Image_Barcode
+                    var bitmapSource = (BitmapSource)Image_Barcode.Source;
+
+                    // Рассчитываем размеры для печати (можно настроить под ваши нужды)
+                    double printableWidth = 205;
+                    double printableHeight = 140;
+                    double scale = Math.Min(printableWidth / bitmapSource.Width,
+                                            printableHeight / bitmapSource.Height);
+
+                    // Рисуем изображение с масштабированием
+                    drawingContext.DrawImage(bitmapSource,
+                        new Rect(0, 0, bitmapSource.Width * scale, bitmapSource.Height * scale));
+                }
+
+                // Отправляем на печать
+                printDialog.PrintVisual(visual, "Штрих-код");
+            }
+        }
+
     }
 }

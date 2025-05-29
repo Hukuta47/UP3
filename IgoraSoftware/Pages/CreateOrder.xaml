@@ -15,6 +15,7 @@
 			<TextBlock Text="Код клиента"/>
 			<ComboBox Name="ComboBox_CodeClientEnter" IsEditable="True" DisplayMemberPath="Code" SelectedValuePath="Code"/>
 			<TextBlock Text="Услуги"/>
+			<TextBox Name="SearchServices" TextChanged="SearchServices_TextChanged" />
 			<DataGrid Name="DataGrid_ListServices" Style="{StaticResource DataGridNoSelect}" Height="150" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False">
 				<DataGrid.Columns>
 					<DataGridTemplateColumn>
