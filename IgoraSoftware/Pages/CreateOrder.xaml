@@ -29,6 +29,7 @@
 					<DataGridTextColumn Header="Стоимость" Width="1*" Binding="{Binding PricePerHourService, StringFormat=F2}"/>
 				</DataGrid.Columns>
 			</DataGrid>
+			<Button Name="Button_CreateService" Content="Создать услугу" Click="Button_CreateService_Click"/>
 			<Button Content="Создать заказ" Click="CreateOrder_Click"/>
 			<Image Height="100" Width="140" Name="Image_Barcode"/>
 

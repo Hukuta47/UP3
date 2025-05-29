@@ -97,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="CreateServiceDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -106,6 +110,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BlockedUser.cs" />
+    <Compile Include="CreateServiceDialog.xaml.cs">
+      <DependentUpon>CreateServiceDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Database\Clients.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

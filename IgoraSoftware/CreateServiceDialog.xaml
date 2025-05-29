@@ -1,0 +1,22 @@
+﻿<Window x:Class="IgoraSoftware.CreateServiceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IgoraSoftware"
+        mc:Ignorable="d"
+        Title="CreateServiceDialog" Height="450" Width="800">
+    <Grid>
+		<StackPanel>
+			<TextBlock Text="ID Услуги"/>
+			<TextBox Name="TextBox_IDServieEnter"/>
+			<TextBlock Text="Название услуги"/>
+			<TextBox Name="TextBox_NameServiceEnter"/>
+			<TextBlock Text="Код услуги"/>
+			<TextBox Name="TextBox_CodeServiceEnter"/>
+			<TextBlock Text="Цена за час"/>
+			<TextBox Name="TextBox_PricePerHourServiceEnter"/>
+			<Button Name="Button_CreteService" Click="Button_CreteService_Click"/>
+		</StackPanel>
+	</Grid>
+</Window>
