@@ -2,6 +2,7 @@
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -26,6 +27,7 @@ namespace IgoraSoftware.Pages
             ComboBox_CodeOrderEnter.ItemsSource = App.entities.Orders_Log.ToList();
             ComboBox_CodeOrderEnter.Text = (App.entities.Order.ToList().Last().Id + 1).ToString();
             ComboBox_CodeClientEnter.ItemsSource = App.entities.Clients.ToList();
+            ComboBox_CodeClientEnter.SelectedValue = App.entities.Clients.ToList().Last().Code;
             DataGrid_ListServices.ItemsSource = itemsDatas;
         }
         private void CheckBox_Click(object sender, RoutedEventArgs e)
@@ -46,14 +48,19 @@ namespace IgoraSoftware.Pages
             public decimal PricePerHourService { get; }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void CreateOrder_Click(object sender, RoutedEventArgs e)
         {
             float scale = 5;
 
             Image_Barcode.Width = 205;
             Image_Barcode.Height = 250;
-            string code = "4546255308042022";
-            // (16 / 2) + 1 = 9
+
+            string ClientCode = ComboBox_CodeClientEnter.Text;
+            string DateCode = DateTime.Now.ToShortDateString().Replace(".", "");
+
+            string code = ClientCode + DateCode;
+
+
 
             var info = new SKImageInfo((int)Image_Barcode.Width, (int)Image_Barcode.Height);
             using (var surface = SKSurface.Create(info))
@@ -83,19 +90,30 @@ namespace IgoraSoftware.Pages
                         if (indexNumber != 15) indexNumber++;
                     }
                 }
-
                 using (var typeface = SKTypeface.FromFamilyName("Times New Roman"))
-                using (var font = new SKFont(typeface, 16))
-                using (var Number = SKTextBlob.Create($"{code}", font))
+                using (var font = new SKFont(typeface, 19))
+                using (var Number = SKTextBlob.Create($"{ClientCode}", font))
                 {
                     var textPaint = new SKPaint
                     {
                         Color = SKColors.Black,
                         IsAntialias = true,
-                        
                     };
 
-                    canvas.DrawText(Number, 10, 30, textPaint);
+                    canvas.DrawText(Number, 20, 26.85f * scale, textPaint);
+                }
+                using (var typeface = SKTypeface.FromFamilyName("Times New Roman"))
+                using (var font = new SKFont(typeface, 19))
+                using (var Number = SKTextBlob.Create($"{DateCode}", font))
+                {
+                    var textPaint = new SKPaint
+                    {
+                        Color = SKColors.Black,
+                        IsAntialias = true,
+
+                    };
+
+                    canvas.DrawText(Number, 110, 26.85f * scale, textPaint);
                 }
 
 
