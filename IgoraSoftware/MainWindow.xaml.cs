@@ -12,7 +12,7 @@ namespace IgoraSoftware
         {
             InitializeComponent();
             WindowFrame = Frame_MainFrame;
-            WindowFrame.Navigate(new LoginPage());
+            WindowFrame.Navigate(new CreateOrder());
         }
     }
 }
