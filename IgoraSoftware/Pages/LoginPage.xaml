@@ -5,36 +5,64 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:IgoraSoftware.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="LoginPage">
 
-    <Grid>
-		<Grid Name="Grid_BlockSplash" Background="White" Panel.ZIndex="1" Visibility="Collapsed">
-			<TextBlock Name="TextBlock_TimerBlock" Text="10" FontSize="64" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-		</Grid>
-		
-		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
-			<TextBlock Text="Логин"/>
+	<Border Width="396" VerticalAlignment="Center" Background="White" CornerRadius="32" Padding="48,32,48,31.4">
+		<Border.Effect>
+			<DropShadowEffect/>
+		</Border.Effect>
+		<StackPanel>
+			<TextBlock FontFamily="Comic Sans MS" Text="Вход в систему" HorizontalAlignment="Center" FontSize="40px"/>
+			<Rectangle Height="10"/>
 			<TextBox Name="TextBox_LoginEnter"/>
-			<TextBlock Text="Пароль"/>
-			<PasswordBox Name="PasswordBox_PasswordEnter"/>
-			
-			<Grid Name="Grid_Captcha" Visibility="Hidden">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="5*"/>
-					<ColumnDefinition Width="1*"/>
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition/>
-					<RowDefinition/>
-				</Grid.RowDefinitions>
+			<Rectangle Height="10"/>
+			<StackPanel Orientation="Horizontal">
+				<PasswordBox Name="PasswordBox_PasswordEnter" Width="233"/>
+				<Rectangle Width="10"/>
+				<Button Width="57" Height="57">
+					<Button.Resources>
+						<Style TargetType="Border">
+							<Setter Property="CornerRadius" Value="16"/>
+						</Style>
+					</Button.Resources>
+					<Button.Content>
+						<Image Source="/Resources/Eye off.png" Width="32"/>
+					</Button.Content>
+				</Button>
+			</StackPanel>
+			<StackPanel Width="280">
+				<Rectangle Height="10"/>
+				<Border Background="#1B5A00" Height="127" CornerRadius="16" Name="Grid_Captcha">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="auto"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition Height="auto"/>
+						</Grid.RowDefinitions>
 
-				<Image Width="200" Height="50" Grid.Row="0" Grid.ColumnSpan="2" Name="Image_PictureCAPTCha"/>
-				<TextBox Grid.Column="0" Grid.Row="1" Name="TextBox_EnterCaptchaNumer"/>
-				<Button Grid.Column="1" Grid.Row="1" Content="Обновить" Click="ChangeCAPTChaImage_Click"/>
+						<Image Width="200" Height="50" Margin="10,0,0,0" Name="Image_PictureCAPTCha" />
+						<Button Background="#247A00" Grid.Column="1" Width="50" Height="50" Margin="10" Click="ChangeCAPTChaImage_Click">
+							<Button.Content>
+								<Image Source="/Resources/Repeat.png" Width="32"/>
+							</Button.Content>
+						</Button>
+						<TextBox Grid.Row="1" Grid.ColumnSpan="2" Name="TextBox_EnterCaptchaNumer"/>
+					</Grid>
+				</Border>
+			</StackPanel>
+			<Rectangle Height="10"/>
+			<Grid>
+				<Border Background="#b20000" CornerRadius="8" Panel.ZIndex="1" Visibility="Hidden" Name="Grid_BlockSplash">
+					<TextBlock Name="TextBlock_TimerBlock" Text="Вход запрещен ждите 10 сек." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="18" FontFamily="Comic Sans MS"/>
+				</Border>
+				<Button Content="Войти" Width="118" Height="41" Click="Button_Click"/>
 			</Grid>
-			
-			<Button Content="Войти" Click="Button_Click"/>
 		</StackPanel>
-	</Grid>
+		
+	</Border>
+
 </Page>
