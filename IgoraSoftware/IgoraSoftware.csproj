@@ -49,6 +49,7 @@
     <Reference Include="OpenTK, Version=3.3.1.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenTK.3.3.1\lib\net20\OpenTK.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="SkiaSharp, Version=3.119.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\SkiaSharp.3.119.0\lib\net462\SkiaSharp.dll</HintPath>
     </Reference>
@@ -162,6 +163,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\AddClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ByRole\Administrator\AdministratorMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,6 +202,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageHelper.cs" />
+    <Compile Include="Pages\AddClientPage.xaml.cs">
+      <DependentUpon>AddClientPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ByRole\Administrator\AdministratorMainPage.xaml.cs">
       <DependentUpon>AdministratorMainPage.xaml</DependentUpon>
     </Compile>
@@ -267,6 +275,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\Plus circle.png" />
     <Resource Include="Resources\Repeat.png" />
     <Resource Include="Resources\Eye off.png" />
     <Resource Include="Resources\Eye.png" />

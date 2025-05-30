@@ -13,23 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IgoraSoftware.Pages.ByRole.Administrator
+namespace IgoraSoftware.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для HistoryLoginsPage.xaml
+    /// Логика взаимодействия для AddClientPage.xaml
     /// </summary>
-    public partial class HistoryLoginsPage : Page
+    public partial class AddClientPage : Page
     {
-        public HistoryLoginsPage()
+        public AddClientPage()
         {
             InitializeComponent();
-            DataGrid_HistoryLogin.ItemsSource = App.entities.LoginHistory_Log.ToList();
         }
-
         private void Back_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             MainPage.TitleMain.Text = "Главная страница";
             MainWindow.WindowFrame.GoBack();
+        }
+
+        private void AddClient_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

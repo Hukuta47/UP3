@@ -12,7 +12,9 @@
 		<StackPanel HorizontalAlignment="Center">
 			<Button Content="Создать заказ" Click="CreateOrder_Click"/>
 			<Rectangle Height="10"/>
-			<Button Content="Принять товары заказа"/>
+			<Button Content="Принять оборудование заказа" Click="AcceptEqupments_Click"/>
+			<Rectangle Height="10"/>
+			<Button Content="Выйти с учетной записи" Click="ExitUser_Click" Background="#004433"/>
 		</StackPanel>
 	</Grid>
 </Page>

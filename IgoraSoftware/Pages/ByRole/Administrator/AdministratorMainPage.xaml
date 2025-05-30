@@ -10,11 +10,11 @@
 
     <Grid Margin="10">
 		<StackPanel HorizontalAlignment="Center">
-			<Button Content="Сформировать отчет"/>
+			<Button Content="Сформировать отчет по заказам"/>
 			<Rectangle Height="10"/>
 			<Button Content="История входов сотрудников" Click="HistoryLogins_Click"/>
 			<Rectangle Height="10"/>
-			<Button Content="Расходные материалы"/>
+			<Button Content="Выйти с учетной записи" Click="ExitUser_Click" Background="#004433"/>
 		</StackPanel>
 	</Grid>
 </Page>

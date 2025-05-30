@@ -12,6 +12,8 @@
 		<StackPanel HorizontalAlignment="Center" Width="250">
 			<ComboBox IsEditable="True" Name="ComboBox_SelectOrder" DisplayMemberPath="ClientCode" SelectedValuePath="OrderCode"/>
 			<Button Content="Считать штрих код"/>
+			<Rectangle Height="10"/>
+			<Button Content="Назад" Background="#004433" Click="Back_Click"/>
 		</StackPanel>
 	</Grid>
 </Page>

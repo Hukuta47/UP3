@@ -10,5 +10,11 @@ namespace IgoraSoftware.Pages.ByRole.ShiftSupervisor
             InitializeComponent();
             ComboBox_SelectOrder.ItemsSource = App.entities.Order.ToList();
         }
+
+        private void Back_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MainPage.TitleMain.Text = "Главная страница";
+            MainPage.MainFrame.GoBack();
+        }
     }
 }

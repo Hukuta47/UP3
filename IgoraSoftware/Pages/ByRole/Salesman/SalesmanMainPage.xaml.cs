@@ -28,6 +28,13 @@ namespace IgoraSoftware.Pages.ByRole.Salesman
         private void CreateOrder_Click(object sender, RoutedEventArgs e)
         {
             MainPage.MainFrame.Navigate(new CreateOrder());
+            MainPage.TitleMain.Text = "Создание заказа";
+        }
+
+        private void ExitUser_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.timerSession.Stop();
+            MainWindow.WindowFrame.GoBack();
         }
     }
 }

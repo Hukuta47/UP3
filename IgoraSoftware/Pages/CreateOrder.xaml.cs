@@ -47,7 +47,6 @@ namespace IgoraSoftware.Pages
             public string NameService { get; }
             public decimal PricePerHourService { get; }
         }
-
         private void CreateOrder_Click(object sender, RoutedEventArgs e)
         {
             generateshtrihCode();
@@ -57,7 +56,11 @@ namespace IgoraSoftware.Pages
             ggg();
             PrintBarcode();
         }
-
+        private void Back_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MainPage.TitleMain.Text = "Главная страница";
+            MainWindow.WindowFrame.GoBack();
+        }
         private void SearchServices_TextChanged(object sender, TextChangedEventArgs e)
         {
             List<ItemDataGrid> itemsDatas = new List<ItemDataGrid>();
@@ -184,6 +187,11 @@ namespace IgoraSoftware.Pages
         private void Button_CreateService_Click(object sender, RoutedEventArgs e)
         {
             new CreateServiceDialog().ShowDialog();
+        }
+
+        private void CreateClient_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.MainFrame.Navigate(new AddClientPage());
         }
     }
 }

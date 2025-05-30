@@ -64,7 +64,7 @@
 				</MultiTrigger>
 			</Style.Triggers>
 		</Style>
-		
+
 		<Style TargetType="TextBox">
 			<Setter Property="BorderBrush" Value="#1B5A00"/>
 			<Setter Property="Height" Value="57"/>
@@ -78,9 +78,6 @@
 				</Style>
 			</Style.Resources>
 		</Style>
-
-
-
 
 		<Style TargetType="Button">
 			<Setter Property="Background" Value="#1B5A00"/>
@@ -96,6 +93,18 @@
 			</Style.Resources>
 		</Style>
 
-
+		<Style TargetType="DatePicker">
+			<Setter Property="BorderBrush" Value="#1B5A00"/>
+			<Setter Property="Height" Value="57"/>
+			<Setter Property="FontFamily" Value="Comic Sans MS"/>
+			<Setter Property="BorderThickness" Value="2"/>
+			<Setter Property="Padding" Value="16, 16, 0, 0"/>
+			<Setter Property="FontSize" Value="18"/>
+			<Style.Resources>
+				<Style TargetType="Border">
+					<Setter Property="CornerRadius" Value="16"/>
+				</Style>
+			</Style.Resources>
+		</Style>
 	</Application.Resources>
 </Application>

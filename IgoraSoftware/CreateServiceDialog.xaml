@@ -5,18 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IgoraSoftware"
         mc:Ignorable="d"
-        Title="CreateServiceDialog" Height="450" Width="800">
-    <Grid>
+		SizeToContent="Height"
+		WindowStartupLocation="CenterOwner"
+		ResizeMode="NoResize"
+        Title="Создание услуги" Width="485">
+    <Grid Margin="10">
 		<StackPanel>
-			<TextBlock Text="ID Услуги"/>
-			<TextBox Name="TextBox_IDServieEnter"/>
-			<TextBlock Text="Название услуги"/>
-			<TextBox Name="TextBox_NameServiceEnter"/>
-			<TextBlock Text="Код услуги"/>
-			<TextBox Name="TextBox_CodeServiceEnter"/>
-			<TextBlock Text="Цена за час"/>
-			<TextBox Name="TextBox_PricePerHourServiceEnter"/>
-			<Button Name="Button_CreteService" Click="Button_CreteService_Click"/>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Text="ID Услуги  " Width="140"  FontSize="16" FontFamily="Comic Sans MS" VerticalAlignment="Center" Grid.Column="0" TextAlignment="Right"/>
+				<TextBox Name="TextBox_IDServieEnter" Grid.Column="1"/>
+			</Grid>
+			<Rectangle Height="10"/>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Text="Название услуги  " TextAlignment="Right" FontSize="16" Width="140" FontFamily="Comic Sans MS" VerticalAlignment="Center" Grid.Column="0"/>
+				<TextBox Name="TextBox_NameServiceEnter" Grid.Column="1"/>
+			</Grid>
+			<Rectangle Height="10"/>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Text="Код услуги  " TextAlignment="Right" FontSize="16" Width="140" FontFamily="Comic Sans MS" VerticalAlignment="Center" Grid.Column="0"/>
+				<TextBox  Name="TextBox_CodeServiceEnter" Grid.Column="1"/>
+			</Grid>
+			<Rectangle Height="10"/>
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Text="Цена за час  " TextAlignment="Right" FontSize="16" Width="140" FontFamily="Comic Sans MS" VerticalAlignment="Center" Grid.Column="0"/>
+				<TextBox Name="TextBox_PricePerHourServiceEnter" Grid.Column="1"/>
+			</Grid>
+			<Rectangle Height="10"/>
+
+
+			<Button Name="Button_CreteService" Content="Создать услугу" Click="Button_CreteService_Click" HorizontalAlignment="Center"/>
 		</StackPanel>
 	</Grid>
 </Window>

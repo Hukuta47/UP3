@@ -28,5 +28,10 @@ namespace IgoraSoftware.Pages.ByRole.Administrator
         {
             MainPage.MainFrame.Navigate(new HistoryLoginsPage());
         }
+        private void ExitUser_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.timerSession.Stop();
+            MainWindow.WindowFrame.GoBack();
+        }
     }
 }

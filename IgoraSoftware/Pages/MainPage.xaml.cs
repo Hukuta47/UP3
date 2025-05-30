@@ -13,21 +13,26 @@ namespace IgoraSoftware.Pages
     public partial class MainPage : Page
     {
         public static Frame MainFrame;
+        public static TextBlock TitleMain;
+
         Users User;
-        DispatcherTimer timerSession = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromSeconds(1) };
+        static public DispatcherTimer timerSession = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromSeconds(1) };
         TimeSpan timeSession = new TimeSpan(2, 30, 0);
         TimeSpan timeToEndSession = TimeSpan.FromMinutes(15);
-        //TimeSpan timeSession = new TimeSpan(0, 0, 10);
+        //TimeSpan timeSession = new TimeSpan(0, 0, 5);
         //TimeSpan timeToEndSession = TimeSpan.FromMinutes(1);
         public MainPage(Users User)
         {
             this.User = User;
             timerSession.Tick += TimerSession_Tick;
-            
+
             InitializeComponent();
+
+            TitleMain = TextBlock_TitleWelcomeText;
+
             TextBlock_TitleWelcomeText.Text = $"Добро пожаловать {User.Name}!";
-            TextBlock_TimeSession.Text = timeSession.ToString().Substring(0, 5);
-            timerSession.Start();
+            if (User.RoleId != 1) TextBlock_TimeSession.Text = "Оставшеевся время сеанса: " + timeSession.ToString();
+            if (User.RoleId != 1) timerSession.Start();
             MainFrame = Frame_UserPages;
             switch (User.RoleId)
             {
@@ -39,14 +44,15 @@ namespace IgoraSoftware.Pages
         private void TimerSession_Tick(object sender, EventArgs e)
         {
 
-            if (timeSession != TimeSpan.Zero)
+            if (timeSession > TimeSpan.FromSeconds(1))
             {
                 timeSession -= TimeSpan.FromSeconds(1);
-                TextBlock_TimeSession.Text = "Оставшеевся время сеанса: " + timeSession.ToString().Substring(0, 5);
+                TextBlock_TimeSession.Text = "Оставшеевся время сеанса: " + timeSession.ToString();
 
                 if (timeSession == timeToEndSession)
                 {
                     TextBlock_TimeSession.Foreground = new SolidColorBrush(Colors.Red);
+                    TextBlock_Warning.Visibility = Visibility.Visible;
                 }
             }
             else
@@ -54,7 +60,7 @@ namespace IgoraSoftware.Pages
                 timerSession.Stop();
                 App.blockedUsers.Add(new BlockedUser(User));
                 MessageBox.Show("Выход из системы!");
-                MainWindow.WindowFrame.GoBack();
+                MainWindow.WindowFrame.Navigate(new LoginPage());
             }
         }
     }

@@ -49,7 +49,7 @@
 								<RectangleGeometry RadiusX="6" RadiusY="6" Rect="0,0,200,50"/>
 							</Image.Clip>
 						</Image>
-						<Button Background="#247A00" Grid.Column="1" Width="50" Height="50" Margin="10" Click="ChangeCAPTChaImage_Click">
+						<Button Background="#247A00" Grid.Column="1" Padding="0" Width="50" Height="50" Margin="10" Click="ChangeCAPTChaImage_Click">
 							<Button.Content>
 								<Image Source="/Resources/Repeat.png" Width="32"/>
 							</Button.Content>

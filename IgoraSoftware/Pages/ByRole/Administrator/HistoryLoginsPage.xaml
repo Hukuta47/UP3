@@ -9,12 +9,25 @@
       Title="HistoryLoginsPage">
 
     <Grid>
-		<DataGrid Name="DataGrid_HistoryLogin" AutoGenerateColumns="False" IsReadOnly="True">
+
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+		
+		<DataGrid Name="DataGrid_HistoryLogin" AutoGenerateColumns="False" IsReadOnly="True" Style="{StaticResource DataGridNoSelect}">
 			<DataGrid.Columns>
-				<DataGridTextColumn Header="Пользователь" Binding="{Binding Users.Name}"/>
-				<DataGridTextColumn Header="Дата входа" Binding="{Binding LoginTime}"/>
-				<DataGridTextColumn Header="Статус" Binding="{Binding TypeLogin.Name}"/>
+				<DataGridTextColumn Header="Пользователь" Binding="{Binding Users.Name}" Width="*"/>
+				<DataGridTextColumn Header="Дата входа" Binding="{Binding LoginTime}" Width="*"/>
+				<DataGridTextColumn Header="Статус" Binding="{Binding TypeLogin.Name}" Width="*"/>
 			</DataGrid.Columns>
 		</DataGrid>
-    </Grid>
+
+		<StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+			<Button Content="Печать"/>
+			<Rectangle Width="10"/>
+			<Button Content="Назад" Background="#004433" Click="Back_Click"/>
+		</StackPanel>
+
+	</Grid>
 </Page>

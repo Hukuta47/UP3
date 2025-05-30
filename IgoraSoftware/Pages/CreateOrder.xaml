@@ -6,33 +6,93 @@
       xmlns:local="clr-namespace:IgoraSoftware.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CreateOrder">
+      Title="CreateOrder"
+	xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+	
 
 	<Grid>
-		<StackPanel>
-			<TextBlock Text="Код заказа"/>
-			<ComboBox Name="ComboBox_CodeOrderEnter" IsEditable="True" DisplayMemberPath="Id"/>
-			<TextBlock Text="Код клиента"/>
-			<ComboBox Name="ComboBox_CodeClientEnter" IsEditable="True" DisplayMemberPath="Code" SelectedValuePath="Code"/>
-			<TextBlock Text="Услуги"/>
-			<TextBox Name="SearchServices" TextChanged="SearchServices_TextChanged" />
-			<DataGrid Name="DataGrid_ListServices" Style="{StaticResource DataGridNoSelect}" Height="150" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False">
-				<DataGrid.Columns>
-					<DataGridTemplateColumn>
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<CheckBox Click="CheckBox_Click" IsChecked="{Binding IsChecked}"/>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-					<DataGridTextColumn Header="Название услуги" Width="1*" Binding="{Binding NameService}"/>
-					<DataGridTextColumn Header="Стоимость" Width="1*" Binding="{Binding PricePerHourService, StringFormat=F2}"/>
-				</DataGrid.Columns>
-			</DataGrid>
-			<Button Name="Button_CreateService" Content="Создать услугу" Click="Button_CreateService_Click"/>
-			<Button Content="Создать заказ" Click="CreateOrder_Click"/>
+
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+		
+		<StackPanel Grid.Row="0">
+
+			<Grid Margin="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Text="Код заказа" Grid.Column="0" Width="110" FontSize="16" FontFamily="Comic Sans MS"  VerticalAlignment="Center"/>
+				<ComboBox Name="ComboBox_CodeOrderEnter" IsEditable="True" DisplayMemberPath="Id" Grid.Column="1" Height="41"/>
+				
+			</Grid>
+
+
+			<Grid Margin="10">
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Grid.Column="0" Text="Код клиента" Width="110" FontSize="16" FontFamily="Comic Sans MS"  VerticalAlignment="Center"/>
+				<ComboBox Grid.Column="1" Name="ComboBox_CodeClientEnter" IsEditable="True" DisplayMemberPath="Code"  FontSize="16" FontFamily="Comic Sans MS" SelectedValuePath="Code" BorderBrush="#FF1B5A00" />
+				<Button Grid.Column="2" Content="Добавить клиента" Margin="10,0,0,0" Click="CreateClient_Click"/>
+			</Grid>
+			
+			
+			<Rectangle Height="16"/>
+			<TextBlock Text="Услуги" HorizontalAlignment="Center" FontSize="16" FontFamily="Comic Sans MS"/>
+			
+
+
+			<Grid Margin="10">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="auto"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="auto"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+
+				<TextBox Name="SearchServices" TextChanged="SearchServices_TextChanged" Grid.Column="0" Padding="0" Height="48" />
+				<Button Name="Button_CreateService" Click="Button_CreateService_Click" Grid.Column="1" Padding="0" Width="48" Margin="10,0,0,0" >
+					<Button.Content>
+						<Image Source="/Resources/Plus circle.png" Width="32" />
+					</Button.Content>
+				</Button>
+				
+				<DataGrid Grid.Row="1" Grid.ColumnSpan="2"  Name="DataGrid_ListServices" Style="{StaticResource DataGridNoSelect}" Height="150" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" Margin="0,10,0,0">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn>
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<CheckBox Click="CheckBox_Click" IsChecked="{Binding IsChecked}"/>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTextColumn Header="Название услуги" Width="1*" Binding="{Binding NameService}"/>
+						<DataGridTextColumn Header="Стоимость" Width="1*" Binding="{Binding PricePerHourService, StringFormat=F2}"/>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+
+			
+			
 			<Image Height="100" Width="140" Name="Image_Barcode"/>
 
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+			<Button Content="Создать заказ" Click="CreateOrder_Click"/>
+			<Rectangle Width="10"/>
+			<Button Content="Отмена" Click="Back_Click" Background="#004433"/>
 		</StackPanel>
 	</Grid>
 </Page>
