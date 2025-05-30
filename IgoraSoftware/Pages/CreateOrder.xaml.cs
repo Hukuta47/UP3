@@ -16,9 +16,12 @@ namespace IgoraSoftware.Pages
     public partial class CreateOrder : Page
     {
         List<ItemDataGrid> itemsDatas = new List<ItemDataGrid>();
+        public static DataGrid ServicesList;
+        
         public CreateOrder()
         {
             InitializeComponent();
+            ServicesList = DataGrid_ListServices;
             foreach (Services service in App.entities.Services.ToList())
             {
                 itemsDatas.Add(new ItemDataGrid(service.Name, service.PricePerHour));
@@ -29,6 +32,15 @@ namespace IgoraSoftware.Pages
             ComboBox_CodeClientEnter.SelectedValue = App.entities.Clients.ToList().Last().Code;
             DataGrid_ListServices.ItemsSource = itemsDatas;
 
+        }
+        public void RefreshListServices()
+        {
+            List<ItemDataGrid> itemsDatas = new List<ItemDataGrid>();
+            foreach (Services service in App.entities.Services.ToList())
+            {
+                itemsDatas.Add(new ItemDataGrid(service.Name, service.PricePerHour));
+            }
+            DataGrid_ListServices.ItemsSource = itemsDatas;
         }
         private void CheckBox_Click(object sender, RoutedEventArgs e)
         {
@@ -50,6 +62,38 @@ namespace IgoraSoftware.Pages
         private void CreateOrder_Click(object sender, RoutedEventArgs e)
         {
             generateshtrihCode();
+
+            string ClientCode = ComboBox_CodeClientEnter.Text;
+            string DateCode = DateTime.Now.ToShortDateString().Replace(".", "");
+
+            
+            
+            List<Services> servicesList = new List<Services>();
+            foreach (ItemDataGrid itemData in DataGrid_ListServices.Items)
+            {
+                if (itemData.IsChecked == true)
+                {
+                    servicesList.Add(App.entities.Services.FirstOrDefault(serv => serv.Name == itemData.NameService));
+                }
+            }
+
+
+
+            Order order = new Order()
+            {
+                Id = (App.entities.Order.ToList().Last().Id + 1),
+                Code = ClientCode + DateCode,
+                DataCreate = DateTime.Now,
+                ClientCode = ClientCode,
+                StatusId = 1,
+                RentalPeriod = TimeSpan.Parse(TextBox_RentalPeriodEnter.Text),
+                Services = servicesList
+            };
+            App.entities.Order.Add(order);
+            App.entities.SaveChanges();
+
+
+
         }
         void generateshtrihCode()
         {
@@ -154,6 +198,14 @@ namespace IgoraSoftware.Pages
             }
         }
 
+        void GenerateResultData()
+        {
+            TextBlock_DateCreateOrder.Text = DateTime.Now.Date.ToShortDateString();
+            TextBlock_CodeClient.Text = ComboBox_CodeClientEnter.Text;
+            TextBlock_NumberOrder.Text = ComboBox_CodeOrderEnter.Text;
+
+        }
+
         void PrintBarcode()
         {
             // Создаем диалог печати
@@ -186,7 +238,8 @@ namespace IgoraSoftware.Pages
 
         private void Button_CreateService_Click(object sender, RoutedEventArgs e)
         {
-            new CreateServiceDialog().ShowDialog();
+            MainPage.MainFrame.Navigate(new CreateServicePage(this));
+            MainPage.TitleMain.Text = "Создание услуги";
         }
 
         private void CreateClient_Click(object sender, RoutedEventArgs e)

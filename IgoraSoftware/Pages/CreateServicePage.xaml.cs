@@ -11,17 +11,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IgoraSoftware
+namespace IgoraSoftware.Pages
 {
-    public partial class CreateServiceDialog : Window
+    /// <summary>
+    /// Логика взаимодействия для CreateServicePage.xaml
+    /// </summary>
+    public partial class CreateServicePage : Page
     {
-        public CreateServiceDialog()
+        CreateOrder createOrder;
+        public CreateServicePage(CreateOrder createOrder)
         {
+            this.createOrder = createOrder;
             InitializeComponent();
         }
-
+        private void Back_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            MainPage.TitleMain.Text = "Создание заказа";
+            MainWindow.WindowFrame.GoBack();
+        }
         private void Button_CreteService_Click(object sender, RoutedEventArgs e)
         {
             Services service = new Services()
@@ -34,6 +44,11 @@ namespace IgoraSoftware
 
             App.entities.Services.Add(service);
             App.entities.SaveChanges();
+
+            CreateOrder.ServicesList.ItemsSource = App.entities.Services.ToList();
+            MainPage.TitleMain.Text = "Создание заказа";
+            MainWindow.WindowFrame.GoBack();
+            createOrder.RefreshListServices();
         }
     }
 }

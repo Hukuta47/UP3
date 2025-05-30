@@ -98,10 +98,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="CreateServiceDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -111,9 +107,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BlockedUser.cs" />
-    <Compile Include="CreateServiceDialog.xaml.cs">
-      <DependentUpon>CreateServiceDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Database\Clients.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -191,6 +184,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\CreateServicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -222,6 +219,9 @@
     </Compile>
     <Compile Include="Pages\CreateOrder.xaml.cs">
       <DependentUpon>CreateOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\CreateServicePage.xaml.cs">
+      <DependentUpon>CreateServicePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
