@@ -14,10 +14,12 @@ namespace IgoraSoftware.Database
     
     public partial class LoginHistory_Log
     {
+        public int LogId { get; set; }
         public int UserId { get; set; }
         public System.DateTime LoginTime { get; set; }
-        public int TypeLogin { get; set; }
+        public int TypeLoginId { get; set; }
     
-        public virtual TypeLogin TypeLogin1 { get; set; }
+        public virtual TypeLogin TypeLogin { get; set; }
+        public virtual Users Users { get; set; }
     }
 }

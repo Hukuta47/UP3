@@ -1,5 +1,4 @@
-﻿using IgoraSoftware.Database;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,17 +15,15 @@ using System.Windows.Shapes;
 
 namespace IgoraSoftware.Pages.ByRole.Administrator
 {
-    public partial class AdministratorMainPage : Page
+    /// <summary>
+    /// Логика взаимодействия для HistoryLoginsPage.xaml
+    /// </summary>
+    public partial class HistoryLoginsPage : Page
     {
-        Users User;
-        public AdministratorMainPage(Users User)
+        public HistoryLoginsPage()
         {
-            this.User = User;
             InitializeComponent();
-        }
-        private void HistoryLogins_Click(object sender, RoutedEventArgs e)
-        {
-            MainPage.MainFrame.Navigate(new HistoryLoginsPage());
+            DataGrid_HistoryLogin.ItemsSource = App.entities.LoginHistory_Log.ToList();
         }
     }
 }

@@ -4,22 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8ea5913dcfe74d30b6e2c97ebe491855" Name="Diagram1">
-        <EntityTypeShape EntityType="IgoraModel.Clients" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="IgoraModel.Order" Width="1.5" PointX="3" PointY="4.625" />
-        <EntityTypeShape EntityType="IgoraModel.Orders_Log" Width="1.5" PointX="3" PointY="8.5" />
-        <EntityTypeShape EntityType="IgoraModel.PassportData" Width="1.5" PointX="1.5" PointY="12.625" />
-        <EntityTypeShape EntityType="IgoraModel.Services" Width="1.5" PointX="5.25" PointY="5.125" />
-        <EntityTypeShape EntityType="IgoraModel.Status" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="IgoraModel.TypeLogin" Width="1.5" PointX="5.75" PointY="10.75" />
-        <EntityTypeShape EntityType="IgoraModel.UserRole" Width="1.5" PointX="5.75" PointY="13.75" />
-        <EntityTypeShape EntityType="IgoraModel.Users" Width="1.5" PointX="8" PointY="10.25" />
-        <EntityTypeShape EntityType="IgoraModel.LoginHistory_Log" Width="1.5" PointX="8" PointY="14.25" />
+      <Diagram DiagramId="8ea5913dcfe74d30b6e2c97ebe491855" Name="Diagram1" ZoomLevel="124">
+        <EntityTypeShape EntityType="IgoraModel.Clients" Width="1.5" PointX="0.75" PointY="13.375" />
+        <EntityTypeShape EntityType="IgoraModel.LoginHistory_Log" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="IgoraModel.Order" Width="1.5" PointX="3" PointY="9.25" />
+        <EntityTypeShape EntityType="IgoraModel.Orders_Log" Width="1.5" PointX="3" PointY="13.125" />
+        <EntityTypeShape EntityType="IgoraModel.PassportData" Width="1.5" PointX="1.5" PointY="17.875" />
+        <EntityTypeShape EntityType="IgoraModel.Services" Width="1.5" PointX="5.25" PointY="9.75" />
+        <EntityTypeShape EntityType="IgoraModel.Status" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="IgoraModel.TypeLogin" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="IgoraModel.UserRole" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="IgoraModel.Users" Width="1.5" PointX="6" PointY="3.125" />
         <AssociationConnector Association="IgoraModel.FK_Clients_PassportData" />
         <AssociationConnector Association="IgoraModel.FK_Order_Clients" />
+        <AssociationConnector Association="IgoraModel.FK_LoginHistory_Log_TypeLogin" />
+        <AssociationConnector Association="IgoraModel.FK_LoginHistory_Log_Users" />
         <AssociationConnector Association="IgoraModel.FK_Order_Status" />
         <AssociationConnector Association="IgoraModel.FK_Orders_Log_Status" />
-        <AssociationConnector Association="IgoraModel.FK_LoginHistory_Log_TypeLogin" />
         <AssociationConnector Association="IgoraModel.FK_Users_TypeLogin" />
         <AssociationConnector Association="IgoraModel.FK_Users_UserRole" />
         <AssociationConnector Association="IgoraModel.Order_Services" />

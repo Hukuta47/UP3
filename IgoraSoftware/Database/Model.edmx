@@ -17,17 +17,14 @@
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "Igora.dbo.LoginHistory_Log" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
         <EntityType Name="LoginHistory_Log">
           <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="LoginTime" />
-            <PropertyRef Name="TypeLogin" />
+            <PropertyRef Name="LogId" />
           </Key>
+          <Property Name="LogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="LoginTime" Type="datetime" Nullable="false" />
-          <Property Name="TypeLogin" Type="int" Nullable="false" />
+          <Property Name="TypeLoginId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -131,7 +128,19 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="LoginHistory_Log">
-              <PropertyRef Name="TypeLogin" />
+              <PropertyRef Name="TypeLoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginHistory_Log_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="LoginHistory_Log" Type="Self.LoginHistory_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginHistory_Log">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -223,6 +232,7 @@
         </Association>
         <EntityContainer Name="Хранилище IgoraModelContainer">
           <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginHistory_Log" EntityType="Self.LoginHistory_Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Order_Services" EntityType="Self.Order_Services" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders_Log" EntityType="Self.Orders_Log" Schema="dbo" store:Type="Tables" />
@@ -232,19 +242,16 @@
           <EntitySet Name="TypeLogin" EntityType="Self.TypeLogin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LoginHistory_Log" EntityType="Self.LoginHistory_Log" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [LoginHistory_Log].[UserId] AS [UserId], 
-    [LoginHistory_Log].[LoginTime] AS [LoginTime], 
-    [LoginHistory_Log].[TypeLogin] AS [TypeLogin]
-    FROM [dbo].[LoginHistory_Log] AS [LoginHistory_Log]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Clients_PassportData" Association="Self.FK_Clients_PassportData">
             <End Role="PassportData" EntitySet="PassportData" />
             <End Role="Clients" EntitySet="Clients" />
           </AssociationSet>
           <AssociationSet Name="FK_LoginHistory_Log_TypeLogin" Association="Self.FK_LoginHistory_Log_TypeLogin">
             <End Role="TypeLogin" EntitySet="TypeLogin" />
+            <End Role="LoginHistory_Log" EntitySet="LoginHistory_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginHistory_Log_Users" Association="Self.FK_LoginHistory_Log_Users">
+            <End Role="Users" EntitySet="Users" />
             <End Role="LoginHistory_Log" EntitySet="LoginHistory_Log" />
           </AssociationSet>
           <AssociationSet Name="FK_Order_Clients" Association="Self.FK_Order_Clients">
@@ -282,6 +289,7 @@
       <Schema Namespace="IgoraModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="IgoraEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Clients" EntityType="IgoraModel.Clients" />
+          <EntitySet Name="LoginHistory_Log" EntityType="IgoraModel.LoginHistory_Log" />
           <EntitySet Name="Order" EntityType="IgoraModel.Order" />
           <EntitySet Name="Orders_Log" EntityType="IgoraModel.Orders_Log" />
           <EntitySet Name="PassportData" EntityType="IgoraModel.PassportData" />
@@ -290,7 +298,6 @@
           <EntitySet Name="TypeLogin" EntityType="IgoraModel.TypeLogin" />
           <EntitySet Name="UserRole" EntityType="IgoraModel.UserRole" />
           <EntitySet Name="Users" EntityType="IgoraModel.Users" />
-          <EntitySet Name="LoginHistory_Log" EntityType="IgoraModel.LoginHistory_Log" />
           <AssociationSet Name="FK_Clients_PassportData" Association="IgoraModel.FK_Clients_PassportData">
             <End Role="PassportData" EntitySet="PassportData" />
             <End Role="Clients" EntitySet="Clients" />
@@ -299,6 +306,14 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
+          <AssociationSet Name="FK_LoginHistory_Log_TypeLogin" Association="IgoraModel.FK_LoginHistory_Log_TypeLogin">
+            <End Role="TypeLogin" EntitySet="TypeLogin" />
+            <End Role="LoginHistory_Log" EntitySet="LoginHistory_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginHistory_Log_Users" Association="IgoraModel.FK_LoginHistory_Log_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LoginHistory_Log" EntitySet="LoginHistory_Log" />
+          </AssociationSet>
           <AssociationSet Name="FK_Order_Status" Association="IgoraModel.FK_Order_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="Order" EntitySet="Order" />
@@ -306,10 +321,6 @@
           <AssociationSet Name="FK_Orders_Log_Status" Association="IgoraModel.FK_Orders_Log_Status">
             <End Role="Status" EntitySet="Status" />
             <End Role="Orders_Log" EntitySet="Orders_Log" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LoginHistory_Log_TypeLogin" Association="IgoraModel.FK_LoginHistory_Log_TypeLogin">
-            <End Role="TypeLogin" EntitySet="TypeLogin" />
-            <End Role="LoginHistory_Log" EntitySet="LoginHistory_Log" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_TypeLogin" Association="IgoraModel.FK_Users_TypeLogin">
             <End Role="TypeLogin" EntitySet="TypeLogin" />
@@ -337,6 +348,17 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="PassportData" Relationship="IgoraModel.FK_Clients_PassportData" FromRole="Clients" ToRole="PassportData" />
           <NavigationProperty Name="Order" Relationship="IgoraModel.FK_Order_Clients" FromRole="Clients" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="LoginHistory_Log">
+          <Key>
+            <PropertyRef Name="LogId" />
+          </Key>
+          <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LoginTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TypeLoginId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TypeLogin" Relationship="IgoraModel.FK_LoginHistory_Log_TypeLogin" FromRole="LoginHistory_Log" ToRole="TypeLogin" />
+          <NavigationProperty Name="Users" Relationship="IgoraModel.FK_LoginHistory_Log_Users" FromRole="LoginHistory_Log" ToRole="Users" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -422,19 +444,9 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastLogin" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="TypeLogin" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LoginHistory_Log" Relationship="IgoraModel.FK_LoginHistory_Log_Users" FromRole="Users" ToRole="LoginHistory_Log" />
           <NavigationProperty Name="TypeLogin1" Relationship="IgoraModel.FK_Users_TypeLogin" FromRole="Users" ToRole="TypeLogin" />
           <NavigationProperty Name="UserRole" Relationship="IgoraModel.FK_Users_UserRole" FromRole="Users" ToRole="UserRole" />
-        </EntityType>
-        <EntityType Name="LoginHistory_Log">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="LoginTime" />
-            <PropertyRef Name="TypeLogin" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="LoginTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="TypeLogin" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TypeLogin1" Relationship="IgoraModel.FK_LoginHistory_Log_TypeLogin" FromRole="LoginHistory_Log" ToRole="TypeLogin" />
         </EntityType>
         <Association Name="FK_Clients_PassportData">
           <End Type="IgoraModel.PassportData" Role="PassportData" Multiplicity="1" />
@@ -460,6 +472,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LoginHistory_Log_TypeLogin">
+          <End Type="IgoraModel.TypeLogin" Role="TypeLogin" Multiplicity="1" />
+          <End Type="IgoraModel.LoginHistory_Log" Role="LoginHistory_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeLogin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginHistory_Log">
+              <PropertyRef Name="TypeLoginId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginHistory_Log_Users">
+          <End Type="IgoraModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="IgoraModel.LoginHistory_Log" Role="LoginHistory_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginHistory_Log">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Order_Status">
           <End Type="IgoraModel.Status" Role="Status" Multiplicity="1" />
           <End Type="IgoraModel.Order" Role="Order" Multiplicity="*" />
@@ -481,18 +517,6 @@
             </Principal>
             <Dependent Role="Orders_Log">
               <PropertyRef Name="StatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LoginHistory_Log_TypeLogin">
-          <End Type="IgoraModel.TypeLogin" Role="TypeLogin" Multiplicity="1" />
-          <End Type="IgoraModel.LoginHistory_Log" Role="LoginHistory_Log" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TypeLogin">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LoginHistory_Log">
-              <PropertyRef Name="TypeLogin" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -540,6 +564,16 @@
                 <ScalarProperty Name="PassportDataId" ColumnName="PassportDataId" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginHistory_Log">
+            <EntityTypeMapping TypeName="IgoraModel.LoginHistory_Log">
+              <MappingFragment StoreEntitySet="LoginHistory_Log">
+                <ScalarProperty Name="TypeLoginId" ColumnName="TypeLoginId" />
+                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LogId" ColumnName="LogId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -622,15 +656,6 @@
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LoginHistory_Log">
-            <EntityTypeMapping TypeName="IgoraModel.LoginHistory_Log">
-              <MappingFragment StoreEntitySet="LoginHistory_Log">
-                <ScalarProperty Name="TypeLogin" ColumnName="TypeLogin" />
-                <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -6,16 +6,33 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace IgoraSoftware.Pages
 {
     public partial class LoginPage : Page
     {
         int AttemptsLogin = 0;
+        TimeSpan timeBlock = TimeSpan.FromSeconds(10);
+        DispatcherTimer timerBlockLogin = new DispatcherTimer(DispatcherPriority.Render) { Interval = TimeSpan.FromSeconds(1) };
         string GeneratedNumberCaptcha;
         public LoginPage()
         {
+            timerBlockLogin.Tick += TimerBlockLogin_Tick;
             InitializeComponent();
+        }
+        private void TimerBlockLogin_Tick(object sender, EventArgs e)
+        {
+            timeBlock -= TimeSpan.FromSeconds(1);
+            TextBlock_TimerBlock.Text = timeBlock.Seconds.ToString();
+
+            if (timeBlock > TimeSpan.Zero)
+            {
+                timerBlockLogin.Stop();
+                AttemptsLogin = 0;
+                Grid_BlockSplash.Visibility = Visibility.Collapsed;
+                timeBlock = TimeSpan.FromSeconds(10);
+            }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -28,41 +45,69 @@ namespace IgoraSoftware.Pages
 
                 if (Password == User.Password)
                 {
-                    if (App.blockedUsers.Exists(u => u.blockedUser == User))
-                    {
-                        MessageBox.Show($"Учетная запись разблокируется в {App.blockedUsers.Find(u => u.blockedUser == User).GetTimeLeft().Substring(0,5)}");
-                    }
-                    else
+                    if (!App.blockedUsers.Exists(u => u.blockedUser == User))
                     {
                         if (AttemptsLogin == 2 && TextBox_EnterCaptchaNumer.Text == GeneratedNumberCaptcha)
                         {
+                            LoginHistory_Log login = new LoginHistory_Log()
+                            {
+                                UserId = User.Id,
+                                LoginTime = DateTime.Now,
+                                TypeLoginId = 1,
+                            };
+                            App.entities.LoginHistory_Log.Add(login);
+                            App.entities.SaveChanges();
                             MainWindow.WindowFrame.Navigate(new MainPage(User));
                         }
                         else
                         {
+                            LoginHistory_Log login = new LoginHistory_Log()
+                            {
+                                UserId = User.Id,
+                                LoginTime = DateTime.Now,
+                                TypeLoginId = 1,
+                            };
+                            App.entities.LoginHistory_Log.Add(login);
+                            App.entities.SaveChanges();
                             MainWindow.WindowFrame.Navigate(new MainPage(User));
                         }
+                    }
+                    else
+                    {
+
+                        MessageBox.Show($"Учетная запись разблокируется в {App.blockedUsers.Find(u => u.blockedUser == User).GetTimeLeft().Substring(0, 5)}");
                     }
                 }
                 else
                 {
+                    LoginHistory_Log login = new LoginHistory_Log()
+                    {
+                        UserId = User.Id,
+                        LoginTime = DateTime.Now,
+                        TypeLoginId = 2,
+                    };
+                    App.entities.LoginHistory_Log.Add(login);
+                    App.entities.SaveChanges();
+
                     AttemptsLogin++;
                     switch (AttemptsLogin)
                     {
-                        case 2: break;
-                        case 3: break;
+                        case 2:
+                            ChangeCAPTChaImage_Click();
+                            Grid_Captcha.Visibility = Visibility.Visible;
+                        break;
+                        case 3:
+                            MessageBox.Show("Ну ты пиздец, бан тебе на 10 секунд дудосер");
+                            Grid_BlockSplash.Visibility = Visibility.Visible;
+                            timerBlockLogin.Start();
+
+                            TextBox_LoginEnter.Text = String.Empty;
+                            PasswordBox_PasswordEnter.Password = String.Empty;
+                            Grid_Captcha.Visibility = Visibility.Hidden;
+                            TextBox_EnterCaptchaNumer.Text = String.Empty;
+                        break;
                     }
 
-                    if (AttemptsLogin == 2)
-                    {
-                        ChangeCAPTChaImage_Click();
-                        Grid_Captcha.Visibility = Visibility.Visible;
-                    }
-                    else if (AttemptsLogin == 3)
-                    {
-                        MessageBox.Show("Ну ты пиздец, бан тебе на 10 секунд дудосер");
-                    }
-                    
                     MessageBox.Show("Не Заебись");
                 }
             }
@@ -71,6 +116,10 @@ namespace IgoraSoftware.Pages
                 MessageBox.Show("Такого нет(");
             }
         }
+
+
+
+
 
         private void ChangeCAPTChaImage_Click()
         {

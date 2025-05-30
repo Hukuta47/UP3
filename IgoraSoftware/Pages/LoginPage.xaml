@@ -9,6 +9,10 @@
       Title="LoginPage">
 
     <Grid>
+		<Grid Name="Grid_BlockSplash" Background="White" Panel.ZIndex="1" Visibility="Collapsed">
+			<TextBlock Name="TextBlock_TimerBlock" Text="10" FontSize="64" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+		</Grid>
+		
 		<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" >
 			<TextBlock Text="Логин"/>
 			<TextBox Name="TextBox_LoginEnter"/>

@@ -14,6 +14,12 @@ namespace IgoraSoftware.Database
     
     public partial class Users
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Users()
+        {
+            this.LoginHistory_Log = new HashSet<LoginHistory_Log>();
+        }
+    
         public int Id { get; set; }
         public string Name { get; set; }
         public int RoleId { get; set; }
@@ -22,6 +28,8 @@ namespace IgoraSoftware.Database
         public System.DateTime LastLogin { get; set; }
         public int TypeLogin { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LoginHistory_Log> LoginHistory_Log { get; set; }
         public virtual TypeLogin TypeLogin1 { get; set; }
         public virtual UserRole UserRole { get; set; }
     }
