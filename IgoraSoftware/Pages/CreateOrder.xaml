@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:IgoraSoftware.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="990" d:DesignWidth="800"
       Title="CreateOrder"
 	xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 	
@@ -96,14 +96,14 @@
 
 
 
-				<StackPanel>
-					<TextBlock Name="TextBlock_DateCreateOrder"/>
-					<TextBlock Name="TextBlock_CodeClient"/>
-					<TextBlock Name="TextBlock_NumberOrder"/>
-					<TextBlock Name="TextBlock_NameClient"/>
-					<TextBlock Name="TextBlock_ClientAdsress"/>
-					<TextBlock Name="TextBlock_ListServicesSelected"/>
-					<TextBlock Name="TextBlock_PriceResult"/>
+				<StackPanel Margin="10">
+					<TextBlock FontSize="16" FontFamily="Comic Sans MS" Name="TextBlock_DateCreateOrder"/>
+					<TextBlock FontSize="16" FontFamily="Comic Sans MS" Name="TextBlock_CodeClient"/>
+					<TextBlock FontSize="16" FontFamily="Comic Sans MS" Name="TextBlock_NumberOrder"/>
+					<TextBlock FontSize="16" FontFamily="Comic Sans MS" Name="TextBlock_NameClient"/>
+					<TextBlock FontSize="16" FontFamily="Comic Sans MS" Name="TextBlock_ClientAdsress"/>
+					<TextBlock FontSize="16" FontFamily="Comic Sans MS" Name="TextBlock_ListServicesSelected"/>
+					<TextBlock FontSize="16" FontFamily="Comic Sans MS" Name="TextBlock_PriceResult"/>
 				</StackPanel>
 				
 				

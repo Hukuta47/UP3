@@ -1,0 +1,35 @@
+﻿<Page x:Class="IgoraSoftware.Pages.ByRole.Administrator.ResultOrdersLstPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:IgoraSoftware.Pages.ByRole.Administrator"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ResultOrdersLstPage">
+
+	<Grid>
+
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="auto"/>
+		</Grid.RowDefinitions>
+
+		<DataGrid Name="DataGrid_ListOpenOrders" AutoGenerateColumns="False" IsReadOnly="True" Style="{StaticResource DataGridNoSelect}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Код заказа" Binding="{Binding Code}" Width="*"/>
+				<DataGridTextColumn Header="Дата появления заказа" Binding="{Binding DataCreate, StringFormat=dd.MM.yy}" Width="*"/>
+				<DataGridTextColumn Header="Код клиента" Binding="{Binding ClientCode}" Width="*"/>
+				<DataGridTextColumn Header="Статус" Binding="{Binding Status.Name}" Width="*"/>
+				<DataGridTextColumn Header="Время бронирования" Binding="{Binding RentalTime}" Width="*"/>
+			</DataGrid.Columns>
+		</DataGrid>
+
+		<StackPanel Orientation="Horizontal" Grid.Row="1" Margin="10">
+			<Button Content="Печать"/>
+			<Rectangle Width="10"/>
+			<Button Content="Назад" Background="#004433" Click="Back_Click"/>
+		</StackPanel>
+
+	</Grid>
+</Page>

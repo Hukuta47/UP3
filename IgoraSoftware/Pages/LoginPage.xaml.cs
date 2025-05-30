@@ -97,7 +97,6 @@ namespace IgoraSoftware.Pages
                             Border_Captcha.Visibility = Visibility.Visible;
                         break;
                         case 3:
-                            MessageBox.Show("Ну ты пиздец, бан тебе на 10 секунд дудосер");
                             Border_BlockSplash.Visibility = Visibility.Visible;
                             timerBlockLogin.Start();
 
@@ -108,12 +107,12 @@ namespace IgoraSoftware.Pages
                         break;
                     }
 
-                    MessageBox.Show("Не Заебись");
+                    MessageBox.Show("Не верный пароль");
                 }
             }
             else
             {
-                MessageBox.Show("Такого нет(");
+                MessageBox.Show("Пользователя с таким логиным, не существует");
             }
         }
 

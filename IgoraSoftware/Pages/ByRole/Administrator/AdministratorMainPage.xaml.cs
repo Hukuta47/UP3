@@ -33,5 +33,11 @@ namespace IgoraSoftware.Pages.ByRole.Administrator
             MainPage.timerSession.Stop();
             MainWindow.WindowFrame.GoBack();
         }
+
+        private void ResultOrdersList_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.TitleMain.Text = "Отчет по заказам";
+            MainPage.MainFrame.Navigate(new ResultOrdersLstPage());
+        }
     }
 }

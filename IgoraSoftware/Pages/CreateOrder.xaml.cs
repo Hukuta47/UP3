@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -91,6 +92,7 @@ namespace IgoraSoftware.Pages
             };
             App.entities.Order.Add(order);
             App.entities.SaveChanges();
+            GenerateResultData();
 
 
 
@@ -200,10 +202,21 @@ namespace IgoraSoftware.Pages
 
         void GenerateResultData()
         {
-            TextBlock_DateCreateOrder.Text = DateTime.Now.Date.ToShortDateString();
-            TextBlock_CodeClient.Text = ComboBox_CodeClientEnter.Text;
-            TextBlock_NumberOrder.Text = ComboBox_CodeOrderEnter.Text;
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine("Услуги:");
+            foreach (ItemDataGrid itemData in DataGrid_ListServices.Items)
+            {
+                if (itemData.IsChecked == true) stringBuilder.AppendLine($"    - {itemData.NameService}");
+            }
 
+
+
+            TextBlock_DateCreateOrder.Text = "Дата заказа:" + DateTime.Now.Date.ToShortDateString();
+            TextBlock_CodeClient.Text = "Код клиента: " + ComboBox_CodeClientEnter.Text;
+            TextBlock_NumberOrder.Text = "Код заказа:" + ComboBox_CodeOrderEnter.Text;
+            TextBlock_NameClient.Text = "ФИО Клиента: " + App.entities.Clients.FirstOrDefault(cl => cl.Code == ComboBox_CodeClientEnter.Text).Name;
+            TextBlock_ClientAdsress.Text = "Адрес клиента: " + App.entities.Clients.FirstOrDefault(cl => cl.Code == ComboBox_CodeClientEnter.Text).Address;
+            TextBlock_ListServicesSelected.Text = stringBuilder.ToString();
         }
 
         void PrintBarcode()

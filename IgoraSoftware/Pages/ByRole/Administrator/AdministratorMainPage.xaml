@@ -10,7 +10,9 @@
 
     <Grid Margin="10">
 		<StackPanel HorizontalAlignment="Center">
-			<Button Content="Сформировать отчет по заказам"/>
+			<Button Content="Сформировать отчет по заказам" Click="ResultOrdersList_Click"/>
+			<Rectangle Height="10"/>
+			<Button Content="Сформировать отчет по закрытым заказам"/>
 			<Rectangle Height="10"/>
 			<Button Content="История входов сотрудников" Click="HistoryLogins_Click"/>
 			<Rectangle Height="10"/>

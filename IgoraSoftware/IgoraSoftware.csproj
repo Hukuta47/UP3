@@ -168,6 +168,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ByRole\Administrator\ResultOrdersLstPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ByRole\Salesman\SalesmanMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -207,6 +211,9 @@
     </Compile>
     <Compile Include="Pages\ByRole\Administrator\HistoryLoginsPage.xaml.cs">
       <DependentUpon>HistoryLoginsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ByRole\Administrator\ResultOrdersLstPage.xaml.cs">
+      <DependentUpon>ResultOrdersLstPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ByRole\Salesman\SalesmanMainPage.xaml.cs">
       <DependentUpon>SalesmanMainPage.xaml</DependentUpon>
