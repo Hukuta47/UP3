@@ -65,7 +65,7 @@ namespace IgoraSoftware.Pages
                             {
                                 UserId = User.Id,
                                 LoginTime = DateTime.Now,
-                                TypeLoginId = 1,
+                                TypeLoginId = 1
                             };
                             App.entities.LoginHistory_Log.Add(login);
                             App.entities.SaveChanges();
@@ -116,10 +116,6 @@ namespace IgoraSoftware.Pages
                 MessageBox.Show("Такого нет(");
             }
         }
-
-
-
-
 
         private void ChangeCAPTChaImage_Click()
         {

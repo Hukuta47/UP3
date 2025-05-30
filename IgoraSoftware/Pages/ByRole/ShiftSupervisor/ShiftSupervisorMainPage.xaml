@@ -10,7 +10,7 @@
 
 	<Grid>
 		<StackPanel HorizontalAlignment="Center">
-			<Button Content="Создать заказ"/>
+			<Button Content="Создать заказ" Click="CreateOrder_Click"/>
 			<Button Content="Принять товары заказа"/>
 		</StackPanel>
 	</Grid>

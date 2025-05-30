@@ -9,8 +9,12 @@
       Title="HistoryLoginsPage">
 
     <Grid>
-		<DataGrid Name="DataGrid_HistoryLogin">
-			
+		<DataGrid Name="DataGrid_HistoryLogin" AutoGenerateColumns="False" IsReadOnly="True">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Пользователь" Binding="{Binding Users.Name}"/>
+				<DataGridTextColumn Header="Дата входа" Binding="{Binding LoginTime}"/>
+				<DataGridTextColumn Header="Статус" Binding="{Binding TypeLogin.Name}"/>
+			</DataGrid.Columns>
 		</DataGrid>
     </Grid>
 </Page>

@@ -24,5 +24,10 @@ namespace IgoraSoftware.Pages.ByRole.Salesman
             this.User = User;
             InitializeComponent();
         }
+
+        private void CreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.MainFrame.Navigate(new CreateOrder());
+        }
     }
 }

@@ -27,5 +27,10 @@ namespace IgoraSoftware.Pages.ByRole.ShiftSupervisor
             this.User = User;
             InitializeComponent();
         }
+
+        private void CreateOrder_Click(object sender, RoutedEventArgs e)
+        {
+            MainPage.MainFrame.Navigate(new CreateOrder());
+        }
     }
 }

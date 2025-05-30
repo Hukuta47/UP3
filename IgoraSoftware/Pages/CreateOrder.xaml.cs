@@ -183,7 +183,7 @@ namespace IgoraSoftware.Pages
 
         private void Button_CreateService_Click(object sender, RoutedEventArgs e)
         {
-
+            new CreateServiceDialog().ShowDialog();
         }
     }
 }
