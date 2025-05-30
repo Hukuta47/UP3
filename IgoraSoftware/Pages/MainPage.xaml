@@ -5,29 +5,25 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:IgoraSoftware.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="MainPage">
 
     <Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="auto"/>
+			<RowDefinition Height="77"/>
 			<RowDefinition Height="8*"/>
-			<RowDefinition Height="1*"/>
+			<RowDefinition Height="48"/>
 		</Grid.RowDefinitions>
 		
-		<TextBlock Name="TextBlock_TimeSession" Text="00:00" Grid.Row="0"/>
+		<TextBlock Text="00:00" Grid.Row="0"/>
+
 		<Rectangle Grid.Row="0" Fill="Green"/>
-		<Grid Margin="16">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="auto"/>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
+		<TextBlock Grid.Row="0" Name="TextBlock_TitleWelcomeText" Text="Добро пожаловать Пользователь!" FontSize="32" FontFamily="Comic Sans MS" Foreground="White" VerticalAlignment="Center" Margin="32,0,0,0" />
+		
+		<Frame Name="Frame_UserPages" Grid.Row="1" />
+		
+		<Rectangle Grid.Row="2" Fill="Green"/>
+		<TextBlock Grid.Row="2" Name="TextBlock_TimeSession" Text="Оставшеевся время сеанса: 00:00" FontSize="20" FontFamily="Comic Sans MS" Foreground="White" VerticalAlignment="Center" Margin="16,0,0,0" />
 
-			<Rectangle Grid.Column="0" Fill="White" Width="32" Height="32"/>
-
-
-		</Grid>
-		<Frame Name="Frame_UserPages" Grid.Row="1"/>
 	</Grid>
 </Page>

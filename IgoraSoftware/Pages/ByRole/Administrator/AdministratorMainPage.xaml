@@ -8,10 +8,12 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdministratorMainPage">
 
-    <Grid>
+    <Grid Margin="10">
 		<StackPanel HorizontalAlignment="Center">
 			<Button Content="Сформировать отчет"/>
+			<Rectangle Height="10"/>
 			<Button Content="История входов сотрудников" Click="HistoryLogins_Click"/>
+			<Rectangle Height="10"/>
 			<Button Content="Расходные материалы"/>
 		</StackPanel>
 	</Grid>

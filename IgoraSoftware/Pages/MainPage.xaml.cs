@@ -24,8 +24,8 @@ namespace IgoraSoftware.Pages
             this.User = User;
             timerSession.Tick += TimerSession_Tick;
             
-
             InitializeComponent();
+            TextBlock_TitleWelcomeText.Text = $"Добро пожаловать {User.Name}!";
             TextBlock_TimeSession.Text = timeSession.ToString().Substring(0, 5);
             timerSession.Start();
             MainFrame = Frame_UserPages;
@@ -42,7 +42,7 @@ namespace IgoraSoftware.Pages
             if (timeSession != TimeSpan.Zero)
             {
                 timeSession -= TimeSpan.FromSeconds(1);
-                TextBlock_TimeSession.Text = timeSession.ToString().Substring(0, 5);
+                TextBlock_TimeSession.Text = "Оставшеевся время сеанса: " + timeSession.ToString().Substring(0, 5);
 
                 if (timeSession == timeToEndSession)
                 {

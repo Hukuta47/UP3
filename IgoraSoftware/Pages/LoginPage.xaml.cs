@@ -24,13 +24,13 @@ namespace IgoraSoftware.Pages
         private void TimerBlockLogin_Tick(object sender, EventArgs e)
         {
             timeBlock -= TimeSpan.FromSeconds(1);
-            TextBlock_TimerBlock.Text = timeBlock.Seconds.ToString();
+            TextBlock_TimerBlock.Text = $"Вход запрещен ждите {timeBlock.Seconds.ToString()} сек.";
 
-            if (timeBlock > TimeSpan.Zero)
+            if (timeBlock == TimeSpan.Zero)
             {
                 timerBlockLogin.Stop();
                 AttemptsLogin = 0;
-                Grid_BlockSplash.Visibility = Visibility.Collapsed;
+                Border_BlockSplash.Visibility = Visibility.Collapsed;
                 timeBlock = TimeSpan.FromSeconds(10);
             }
         }
@@ -94,16 +94,16 @@ namespace IgoraSoftware.Pages
                     {
                         case 2:
                             ChangeCAPTChaImage_Click();
-                            Grid_Captcha.Visibility = Visibility.Visible;
+                            Border_Captcha.Visibility = Visibility.Visible;
                         break;
                         case 3:
                             MessageBox.Show("Ну ты пиздец, бан тебе на 10 секунд дудосер");
-                            Grid_BlockSplash.Visibility = Visibility.Visible;
+                            Border_BlockSplash.Visibility = Visibility.Visible;
                             timerBlockLogin.Start();
 
                             TextBox_LoginEnter.Text = String.Empty;
                             PasswordBox_PasswordEnter.Password = String.Empty;
-                            Grid_Captcha.Visibility = Visibility.Hidden;
+                            Border_Captcha.Visibility = Visibility.Collapsed;
                             TextBox_EnterCaptchaNumer.Text = String.Empty;
                         break;
                     }

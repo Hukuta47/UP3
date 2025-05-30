@@ -8,9 +8,10 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="SalesmanMainPage">
 
-	<Grid>
+	<Grid Margin="10">
 		<StackPanel HorizontalAlignment="Center">
 			<Button Content="Создать заказ" Click="CreateOrder_Click"/>
+			<Rectangle Height="10"/>
 		</StackPanel>
 	</Grid>
 </Page>

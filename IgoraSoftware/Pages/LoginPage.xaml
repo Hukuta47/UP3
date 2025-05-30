@@ -10,7 +10,7 @@
 
 	<Border Width="396" VerticalAlignment="Center" Background="White" CornerRadius="32" Padding="48,32,48,31.4">
 		<Border.Effect>
-			<DropShadowEffect/>
+			<DropShadowEffect BlurRadius="20" Direction="-90" ShadowDepth="10" Opacity=".25" Color="#103600"/>
 		</Border.Effect>
 		<StackPanel>
 			<TextBlock FontFamily="Comic Sans MS" Text="Вход в систему" HorizontalAlignment="Center" FontSize="40px"/>
@@ -20,7 +20,7 @@
 			<StackPanel Orientation="Horizontal">
 				<PasswordBox Name="PasswordBox_PasswordEnter" Width="233"/>
 				<Rectangle Width="10"/>
-				<Button Width="57" Height="57">
+				<Button Width="57" Height="57" Padding="0">
 					<Button.Resources>
 						<Style TargetType="Border">
 							<Setter Property="CornerRadius" Value="16"/>
@@ -31,9 +31,9 @@
 					</Button.Content>
 				</Button>
 			</StackPanel>
-			<StackPanel Width="280">
+			<StackPanel Width="280" Name="Border_Captcha" Visibility="Collapsed">
 				<Rectangle Height="10"/>
-				<Border Background="#1B5A00" Height="127" CornerRadius="16" Name="Grid_Captcha">
+				<Border Background="#1B5A00" Height="127" CornerRadius="16" >
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition/>
@@ -44,7 +44,11 @@
 							<RowDefinition Height="auto"/>
 						</Grid.RowDefinitions>
 
-						<Image Width="200" Height="50" Margin="10,0,0,0" Name="Image_PictureCAPTCha" />
+						<Image Width="200" Height="50" Margin="10,0,0,0" Name="Image_PictureCAPTCha">
+							<Image.Clip>
+								<RectangleGeometry RadiusX="6" RadiusY="6" Rect="0,0,200,50"/>
+							</Image.Clip>
+						</Image>
 						<Button Background="#247A00" Grid.Column="1" Width="50" Height="50" Margin="10" Click="ChangeCAPTChaImage_Click">
 							<Button.Content>
 								<Image Source="/Resources/Repeat.png" Width="32"/>
@@ -56,7 +60,7 @@
 			</StackPanel>
 			<Rectangle Height="10"/>
 			<Grid>
-				<Border Background="#b20000" CornerRadius="8" Panel.ZIndex="1" Visibility="Hidden" Name="Grid_BlockSplash">
+				<Border Background="#b20000" CornerRadius="8" Panel.ZIndex="1" Visibility="Hidden" Name="Border_BlockSplash">
 					<TextBlock Name="TextBlock_TimerBlock" Text="Вход запрещен ждите 10 сек." VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="18" FontFamily="Comic Sans MS"/>
 				</Border>
 				<Button Content="Войти" Width="118" Height="41" Click="Button_Click"/>

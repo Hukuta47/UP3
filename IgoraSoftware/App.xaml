@@ -26,6 +26,7 @@
 			<Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
 			<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
 			<Setter Property="BorderThickness" Value="2"/>
+			<Setter Property="Padding" Value="16"/>
 			<Setter Property="FontSize" Value="18"/>
 			<Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
 			<Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -69,7 +70,7 @@
 			<Setter Property="Height" Value="57"/>
 			<Setter Property="FontFamily" Value="Comic Sans MS"/>
 			<Setter Property="BorderThickness" Value="2"/>
-			<Setter Property="Padding" Value="16"/>
+			<Setter Property="Padding" Value="16, 16, 0, 0"/>
 			<Setter Property="FontSize" Value="18"/>
 			<Style.Resources>
 				<Style TargetType="Border">
@@ -87,6 +88,7 @@
 			<Setter Property="FontFamily" Value="Comic Sans MS"/>
 			<Setter Property="Foreground" Value="White"/>
 			<Setter Property="FontSize" Value="18"/>
+			<Setter Property="Padding" Value="32,8,32,8"/>
 			<Style.Resources>
 				<Style TargetType="Border">
 					<Setter Property="CornerRadius" Value="8"/>
